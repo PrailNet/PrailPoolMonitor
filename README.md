@@ -1,4 +1,4 @@
-# PrailPoolMonitor
+# Prail.NET Pool Monitor
 The Prail.Net Pool Temperature Monitor
 
 
