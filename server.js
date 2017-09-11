@@ -121,7 +121,7 @@ app.get('/api/update', (req, res) => {
 })
 
 app.get('/api/feed', (req, res) => {
-    let perPage = Math.max(0, req.query.per_page) || 50
+    let perPage = Math.max(0, req.query.per_page) || 24
     let page = Math.max(0, req.query.page)
     let sort = req.query.sort || 'desc'
     let orderBy = req.query.order_by || '_id'
