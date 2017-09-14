@@ -6,10 +6,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Prail.Net Pool Monitor</title>
-    
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
+    <style>
+        .iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 35px;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body ng-controller="MainCtrl">
@@ -21,7 +38,9 @@
                 <p>The Prail.Net Pool Temperature Monitor</p>
                 <h3><b>Latest Temp:</b> {{temp.field1}}&#176; Fahrenheit</h3>
                 <h3><b>Time:</b> {{time}}</h3>
-                <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/328848/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=24&title=Pool+Temp+%2824+Hours%29&type=line&xaxis=Time&yaxis=Temp+Fahrenheit+"></iframe>
+                <div class="iframe-container">
+                    <iframe style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/328848/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=24&title=Pool+Temp+%2824+Hours%29&type=line&xaxis=Time&yaxis=Temp+Fahrenheit+" allowfullscreen=""></iframe>
+                </div>
             </div>
         </div>
     </div>
