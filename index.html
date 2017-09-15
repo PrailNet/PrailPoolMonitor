@@ -34,14 +34,28 @@
 </head>
 
 <body ng-controller="MainCtrl">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="http://www.prail.net" target="_blank" rel="noopener">
+            <img src="art/logo-full.jpg" width="95" height="30" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Pool <span ng-show="temp.field1">({{temp.field1}}&#176;)</span> <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h1>Prail.Net Pool Monitor</h1>
-                <hr>
-                <p>The Prail.Net Pool Temperature Monitor</p>
-                <h3><b>Temp:</b> {{temp.field1}}&#176; Fahrenheit</h3>
-                <h3><b>Time:</b> {{time}}</h3>
+            <div class="col-md-12" style="padding-top: 84px;">
+                <h3 ng-show="temp.field1"><b>Temp:</b> {{temp.field1}}&#176; Fahrenheit</h3>
+                <h3 ng-show="time"><b>Time:</b> <span data-toggle="tooltip" data-placement="top" title="{{timeLong}}">{{time}}</span></h3>
                 <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/328848/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=24&title=Pool+Temp+%2824+Hours%29&type=line&xaxis=Time&yaxis=Temp+Fahrenheit+"
                     allowfullscreen=""></iframe>
                 <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/328848/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=96&title=Pool+Temp+%2896+Hours%29&type=line&xaxis=Time&yaxis=Temp+Fahrenheit+"
@@ -70,7 +84,8 @@
                             var feed = res.data.feeds;
                             var latest = feed[0];
                             $scope.temp = latest;
-                            $scope.time = moment(latest.created_at).format('MMMM Do YYYY, h:mm:ss a');
+                            $scope.time = moment(latest.created_at).format('h:mm:ss a');
+                            $scope.timeLong = moment(latest.created_at).format('MMMM Do YYYY, h:mm:ss a');
                         })
                         .catch(function (err) {
                             console.log(err);
@@ -78,6 +93,9 @@
                 }
                 getData();
                 $interval(getData, 15000);
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                })
             });
     </script>
 </body>
